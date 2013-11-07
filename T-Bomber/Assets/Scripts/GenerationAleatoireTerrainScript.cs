@@ -13,6 +13,28 @@ public class GenerationAleatoireTerrainScript : MonoBehaviour {
 	private int taillemap = 40;
 	private CaseClass caseClass;
 
+	public bool Finished {
+		get {
+			return this.finished;
+		}
+		set {
+			finished = value;
+		}
+	}
+
+	private bool finished = false;
+
+	public LabyClass.Laby A {
+		get {
+			return this.a;
+		}
+		set {
+			a = value;
+		}
+	}
+
+	private LabyClass.Laby a ;
+
 	public CaseClass CaseClass {
 		get {
 			return this.caseClass;
@@ -84,14 +106,17 @@ public class GenerationAleatoireTerrainScript : MonoBehaviour {
 		LabyClass = GetComponent<LabyClass>();
 		X = taillemap/2;
 		Y = taillemap/2;
-		LabyClass.Laby a = new LabyClass.Laby(X, Y);
+		a = new LabyClass.Laby(X, Y);
 		a.generer();
 		GameObject ground = GameObject.Instantiate( Resources.LoadAssetAtPath("Assets/Prefabs/Ground.prefab", typeof(GameObject)) ) as GameObject;
 		ground.transform.localScale = new Vector3(2,2,2);
-		ground.transform.position = new Vector3(0,0,0);
+		ground.transform.position = new Vector3(10,0,10);
 		
 		if(generateArena(a, X, Y))
+		{
 			Debug.Log("Generation du terrain terminée");
+			Finished = true;
+		}
 		else
 			Debug.Log("Error");
 	}
