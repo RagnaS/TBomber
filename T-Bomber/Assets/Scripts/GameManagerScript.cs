@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 
 public class GameManagerScript : MonoBehaviour {
@@ -77,8 +78,11 @@ public class GameManagerScript : MonoBehaviour {
 	void Start () {
 		
 		Terre = GetComponent<GenerationAleatoireTerrainScript>();
+		while(Terre.Finished != true)
+		{}
         CreationJoueur(); // fonction de création des joueurs
 		compt = 0;
+		Terre.Finished = false;
 	}
 	
 
@@ -129,8 +133,6 @@ public class GameManagerScript : MonoBehaviour {
 			NextTurn(); // Passage au tour suivant
 			c = 0;
 		}
-		
-		
 	}
 	
 	public void NextTurn() // fonction pour définir le tour des joueurs
@@ -159,28 +161,72 @@ public class GameManagerScript : MonoBehaviour {
     void CreationJoueur() // fonction de création des équipes
     {
 		Team = new List<List<Player>>(); //liste des équipe
+		int currentPosition = 0;
+		List<List<int>> startPositions = getPositionLibre(nbjoueurs);
+		int coordonneeZ = 0;
+		int coordonneeX = 0;
+		int aleat = 0;
 		for(int l = 0; l < nbjoueurs; l++)
 		{
 		       Vector3 pos =  player[0].transform.position = new Vector3(0.0f, 1.5f, 0.0f); // position de base
 				List<Player> pers = new List<Player>(); // liste définissante une équipe
-			
+				if(nbjoueurs == 1)
+					coordonneeZ = 0;
+				if(nbjoueurs == 2)
+					coordonneeZ = Terre.Y;
 		        for ( k = 0; k < 3; k++) // boucle servant à instantier les joueurs et les placer dans une équipe
 		        {	
 					if(l == 0)
 					{
-		           		 Player joue = ((GameObject)Instantiate(player[k], new Vector3(((0+k) + 1.5f) - Mathf.Floor(Terre.Taillemap/4), 1f, Mathf.Floor(Terre.Taillemap/4)-1.5f), Quaternion.Euler(new Vector3()))).GetComponent<Player>(); // instantiation des personnages en haut a gauche du terrain
+						aleat = Random.Range(0, startPositions[0].Count);
+						coordonneeX = startPositions[0][aleat];
+		           		 Player joue = ((GameObject)Instantiate(player[k], new Vector3(currentPosition, 1f, coordonneeZ), Quaternion.Euler(new Vector3()))).GetComponent<Player>(); // instantiation des personnages en haut a gauche du terrain
 						 pers.Add(joue); // ajout ds joueurs dans la liste
 					}
 				
 					if(l == 1)
 					{
-						 Player joue2 = ((GameObject)Instantiate(enemy[k], new Vector3((((Terre.Taillemap/4) -1.5f) - k) - Mathf.Floor(Terre.X), 1f, -(((Terre.Taillemap/4) - 1.5f )- pos.z)+ Mathf.Floor(Terre.Y)), Quaternion.Euler(new Vector3()))).GetComponent<Player>(); // idem mais a droite
+						 Player joue2 = ((GameObject)Instantiate(enemy[k], new Vector3(currentPosition, 1f, coordonneeZ), Quaternion.Euler(new Vector3()))).GetComponent<Player>(); // idem mais a droite
 						 pers.Add(joue2);
 					}
 		        }
-			Team.Add(pers); //ajoutes des équipes dans la liste
-		}
-		
-      	
+			Team.Add(pers); //ajoutes des équipes dans la liste*/
+		}	
     }
+	
+	List<List<int>> getPositionLibre(int nbJoueurs)
+	{	
+		switch(nbJoueurs)
+		{
+		case 1:
+			List<int> casesLibres = new List<int>();
+			break;
+		case 2:
+			List<int> casesLibres2P1 = new List<int>();
+			List<int> casesLibres2P2 = new List<int>();
+			List<List<int>> listeFinal = new List<List<int>>();
+			for(int i = 0; i<Terre.X ; i++)
+			{
+				if(Terre.A.getValue(i,0) == "  " )
+					casesLibres2P1.Add(i);
+				if(Terre.A.getValue(i,Terre.Y-1) == "  " )
+					casesLibres2P2.Add(i);
+			}
+			listeFinal.Add(casesLibres2P1);
+			listeFinal.Add(casesLibres2P2);
+			return listeFinal;
+		case 3:
+			List<int> casesLibres3P1 = new List<int>();
+			List<int> casesLibres3P2 = new List<int>();
+			List<int> casesLibres3P3 = new List<int>();
+			break;
+		case 4:
+			List<int> casesLibres4P1 = new List<int>();
+			List<int> casesLibres4P2 = new List<int>();
+			List<int> casesLibres4P3 = new List<int>();
+			List<int> casesLibres4P4 = new List<int>();
+			break;
+		}
+		return null;
+	}
 }
