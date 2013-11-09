@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿//2013 Mickaël Braga
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour {
 	private bool menu = false; // Booléen du menu permettant de déterminer son apparition
 	private bool mouvement = false; //Booléen permettant de savoir si l'on va déplacer le personnage
 	private bool poser = false; // Booléen permettant de savoir si l'on va placer une bombe
+	private bool bouger = false;
 	
 	private Vector3 positionpotentiel; //variable de position potentielle ou l'on déplacera le personnage
 	[SerializeField]
@@ -30,6 +32,15 @@ public class Player : MonoBehaviour {
 
 	
 	#region encapsulateurs
+
+	public bool Bouger {
+		get {
+			return this.bouger;
+		}
+		set {
+			bouger = value;
+		}
+	}
 
 	public int Cheminprec {
 		get {
@@ -233,18 +244,28 @@ public class Player : MonoBehaviour {
 						
 						}
 					
-						if (Input.GetKeyDown(KeyCode.Z)) {
-							Bougerpers ();
-							verifcompteuraction(); // le compteur d'action baisse après la validation de l'action
-							for (int cl = 0; cl < chemin.Count; cl++) {
-								Destroy (chemin [cl]); //Destruction du chemin une fois qu'il a servi
-									
-							}
+						if (Input.GetKey(KeyCode.Z)) {
 							
-							if (compteuraction != 0) {
-								Menu = true; // tant que le compteur d'action n'est pas égal a  0 le menu est présent
-							}
+                            Bouger = true;
+                            verifcompteuraction();
+                            
+							
 						}
+				
+						if(Bouger == true)
+						{
+                            
+							Bougerpers ();
+                            
+                           
+						}
+
+
+                        if (compteuraction != 0)
+                        {
+                            Menu = true; // tant que le compteur d'action n'est pas égal a  0 le menu est présent
+                        }
+                        
 					
 					
 					}
@@ -303,8 +324,8 @@ public class Player : MonoBehaviour {
 			if(GUI.Button(new Rect(130,20,100,30),"Deplacement"))
 			{
 				Deplacement();
-                Poser = false;
-                Destroy(Bombe);
+				Poser = false;
+				Destroy(Bombe);
 				
 
 			}
@@ -312,14 +333,19 @@ public class Player : MonoBehaviour {
 			if(GUI.Button(new Rect(130,60,100,30),"Placer Bombe"))
 			{
 				PlacerBombe();
-                Mouvement = false;
-                chemin = new List<GameObject>();
+				Mouvement = false;
+				Bouger = false;
+				for (int cl = 0; cl < chemin.Count; cl++) 
+					{
+						Destroy (chemin [cl]); //Destruction du chemin une fois qu'il a servi
+									
+					}
 			}
 			
-			if(GUI.Button(new Rect(130,100,100,30),"Capacité"))
+			/*if(GUI.Button(new Rect(130,100,100,30),"Capacité"))
 			{
 				Capacite();
-			}
+			}*/
 		}
 	}
 	#endregion
@@ -377,6 +403,19 @@ public class Player : MonoBehaviour {
 		if(this.gameObject.transform.position != positionpotentiel)
 			{
 				 this.gameObject.transform.position = Vector3.Lerp(this.gameObject.transform.position,new Vector3(Positionpotentiel.x,1f,Positionpotentiel.z), 3f * Time.deltaTime); //Déplacement du personnage
+				if(this.gameObject.transform.position == Positionpotentiel)
+				{
+
+                    
+					Bouger = false;	
+					Mouvement = false;
+				}
+				for (int cl = 0; cl < chemin.Count; cl++) 
+				{
+								Destroy (chemin [cl]); //Destruction du chemin une fois qu'il a servi
+									
+				}
+                
 			}
 		
 			
@@ -429,6 +468,6 @@ public class Player : MonoBehaviour {
 
 	void verifcompteuraction()
 	{
-		compteuraction--;
+		Compteuraction--;
 	}
 }
