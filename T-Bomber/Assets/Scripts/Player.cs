@@ -247,7 +247,9 @@ public class Player : MonoBehaviour {
 						if (Input.GetKey(KeyCode.Z)) {
 							
                             Bouger = true;
-                            verifcompteuraction();
+                            
+
+                            
                             
 							
 						}
@@ -409,7 +411,9 @@ public class Player : MonoBehaviour {
                     
 					Bouger = false;	
 					Mouvement = false;
+                    verifcompteuraction();
 				}
+
 				for (int cl = 0; cl < chemin.Count; cl++) 
 				{
 								Destroy (chemin [cl]); //Destruction du chemin une fois qu'il a servi

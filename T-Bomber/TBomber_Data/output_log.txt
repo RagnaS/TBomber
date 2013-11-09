@@ -1,0 +1,32 @@
+Initialize engine version: 4.2.2f1 (54f0fc09defb)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [nvd3dum.dll 9.18.13.2723]
+    Renderer: NVIDIA GeForce GTX 670M
+    Vendor:   NVIDIA
+    VRAM:     3004 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 DF24=0 INTZ=1 RAWZ=0 NULL=1 RESZ=0 SlowINTZ=0
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Ragna\Documents\GitHub\TBomber\T-Bomber\TBomber_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Ragna\Documents\GitHub\TBomber\T-Bomber\TBomber_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Ragna\Documents\GitHub\TBomber\T-Bomber\TBomber_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Ragna\Documents\GitHub\TBomber\T-Bomber\TBomber_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+- Completed reload, in  0.060 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+ArgumentException: The thing you want to instantiate is null.
+  at UnityEngine.Object.CheckNullArgument (System.Object arg, System.String message) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Object.Instantiate (UnityEngine.Object original) [0x00000] in <filename unknown>:0 
+  at GenerationAleatoireTerrainScript.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+ArgumentException: The thing you want to instantiate is null.
+  at UnityEngine.Object.CheckNullArgument (System.Object arg, System.String message) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Object.Instantiate (UnityEngine.Object original) [0x00000] in <filename unknown>:0 
+  at Player.Deplacement () [0x00000] in <filename unknown>:0 
+  at Player.OnGUI () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
