@@ -46,14 +46,12 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Bombes.cs" />
      <Compile Include="Assets\Scripts\CaseClass.cs" />
-     <Compile Include="Assets\Scripts\ChangeColorCubeScript.cs" />
      <Compile Include="Assets\Scripts\GameManagerScript.cs" />
      <Compile Include="Assets\Scripts\GenerationAleatoireTerrainScript.cs" />
      <Compile Include="Assets\Scripts\LabyClass.cs" />
      <Compile Include="Assets\Scripts\LookAtScript.cs" />
      <Compile Include="Assets\Scripts\MoveCameraScript.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
-     <Compile Include="Assets\Scripts\TurnOnLightScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

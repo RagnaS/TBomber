@@ -88,7 +88,7 @@ public class GenerationAleatoireTerrainScript : MonoBehaviour {
 		a.generer();
 		GameObject ground = GameObject.Instantiate( Resources.LoadAssetAtPath("Assets/Prefabs/Ground.prefab", typeof(GameObject)) ) as GameObject;
 		ground.transform.localScale = new Vector3(2,2,2);
-		ground.transform.position = new Vector3(0,0,0);
+		ground.transform.position = new Vector3(X/2,0,Y/2);
 		
 		if(generateArena(a, X, Y))
 			Debug.Log("Generation du terrain terminée");
